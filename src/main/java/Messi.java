@@ -12,7 +12,6 @@ public class Messi {
         System.out.println("What can I do for you?");
         System.out.println(horizontalLine);
 
-
         while (true) {
             String input = in.nextLine();
             System.out.println(horizontalLine);
