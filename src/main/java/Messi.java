@@ -8,7 +8,7 @@ public class Messi {
         int taskCount = 0;
 
         System.out.println(horizontalLine);
-        System.out.println("Hola! I'm Messi"); // Replace 'Zola' with your chosen name
+        System.out.println("Hola! I'm Messi");
         System.out.println("What can I do for you?");
         System.out.println(horizontalLine);
 
