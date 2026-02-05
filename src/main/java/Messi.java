@@ -39,7 +39,7 @@ public class Messi {
                 tasks[taskCount] = new Todo(input.substring(5)); //The character index starts from index 5
                 taskCount++;
                 printAddedMessage(tasks[taskCount - 1], taskCount);
-            } else if (input.startsWith ("deadline ")) {
+            } else if (input.startsWith("deadline ")) {
                 String[] parts = input.substring(9).split(" /by "); //The character index starts from index 9
                 tasks[taskCount++] = new Deadline(parts[0], parts[1]);
                 printAddedMessage(tasks[taskCount - 1], taskCount);
@@ -55,9 +55,9 @@ public class Messi {
         }
     }
 
-        private static void printAddedMessage(Task task, int count) {
-            System.out.println("Got it. I've added this task:");
-            System.out.println(" " + task.toString());
-            System.out.println("Now you have " + count + " tasks in the list.");
-        }
+    private static void printAddedMessage(Task task, int count) {
+        System.out.println("Got it. I've added this task:");
+        System.out.println(" " + task.toString());
+        System.out.println("Now you have " + count + " tasks in the list.");
+    }
 }
