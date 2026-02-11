@@ -1,3 +1,11 @@
+package messi.ui;
+
+import messi.exception.MessiException;
+import messi.task.Deadline;
+import messi.task.Event;
+import messi.task.Task;
+import messi.task.Todo;
+
 import java.util.Scanner;
 
 public class Messi {
