@@ -40,13 +40,13 @@ public class Messi {
                     handleMarkUnmark(input, tasks, taskCount, false);
                 } else if (input.startsWith("todo")) {
                     if (input.trim().equalsIgnoreCase("todo")) {
-                        throw new MessiException("to do what??");
+                        throw new MessiException("oh no! to do what??");
                     }
                     tasks[taskCount++] = new Todo(input.substring(5));
                     printAddedMessage(tasks[taskCount - 1], taskCount);
                 } else if (input.startsWith("deadline")) {
                     if (!input.contains(" /by ")) {
-                        throw new MessiException("when is it due?");
+                        throw new MessiException("so... when is it due?");
                     }
                     String[] parts = input.substring(9).split(" /by ");
                     tasks[taskCount++] = new Deadline(parts[0], parts[1]);
