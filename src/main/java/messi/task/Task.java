@@ -9,6 +9,14 @@ public class Task {
         this.isDone = false; // Tasks are not done by default
     }
 
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // Returns X if done, space if not
     }
