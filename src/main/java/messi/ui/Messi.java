@@ -7,13 +7,13 @@ import messi.task.Task;
 import messi.task.Todo;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Messi {
     public static void main(String[] args) {
         String horizontalLine = "____________________________________________________________";
         Scanner in = new Scanner(System.in);
-        Task[] tasks = new Task[100];
-        int taskCount = 0;
+        ArrayList<Task> tasks = new ArrayList<>();
 
         System.out.println(horizontalLine);
         System.out.println("Hola! I'm Messi");
@@ -31,26 +31,28 @@ public class Messi {
                     break;
                 } else if (input.equals("list")) {
                     System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < taskCount; i++) {
-                        System.out.println((i + 1) + "." + tasks[i].toString());
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println((i + 1) + "." + tasks.get(i).toString());
                     }
                 } else if (input.startsWith("mark")) {
-                    handleMarkUnmark(input, tasks, taskCount, true);
+                    handleMarkUnmark(input, tasks, true);
                 } else if (input.startsWith("unmark")) {
-                    handleMarkUnmark(input, tasks, taskCount, false);
+                    handleMarkUnmark(input, tasks, false);
+                }else if (input.startsWith("delete")) {
+                    handleDeletion(input, tasks);
                 } else if (input.startsWith("todo")) {
                     if (input.trim().equalsIgnoreCase("todo")) {
                         throw new MessiException("oh no! to do what??");
                     }
-                    tasks[taskCount++] = new Todo(input.substring(5));
-                    printAddedMessage(tasks[taskCount - 1], taskCount);
+                    tasks.add(new Todo(input.substring(5)));
+                    printAddedMessage(tasks.get(tasks.size() - 1), tasks.size());
                 } else if (input.startsWith("deadline")) {
                     if (!input.contains(" /by ")) {
                         throw new MessiException("so... when is it due?");
                     }
                     String[] parts = input.substring(9).split(" /by ");
-                    tasks[taskCount++] = new Deadline(parts[0], parts[1]);
-                    printAddedMessage(tasks[taskCount - 1], taskCount);
+                    tasks.add(new Deadline(parts[0], parts[1]));
+                    printAddedMessage(tasks.get(tasks.size() - 1), tasks.size());
                 } else if (input.startsWith("event")) {
                     if (!input.contains(" /from ") || !input.contains(" /to ")) {
                         throw new MessiException("this event got a date?");
@@ -58,8 +60,8 @@ public class Messi {
                     String description = input.substring(6).split(" /from ")[0];
                     String from = input.split(" /from ")[1].split(" /to ")[0];
                     String to = input.split(" /to ")[1];
-                    tasks[taskCount++] = new Event(description, from, to);
-                    printAddedMessage(tasks[taskCount - 1], taskCount);
+                    tasks.add(new Event(description, from, to));
+                    printAddedMessage(tasks.get(tasks.size() - 1), tasks.size());
                 } else {
                     // Handle unknown commands
                     throw new MessiException("camera woah woah sorry i don't know what that means");
@@ -72,7 +74,26 @@ public class Messi {
         }
     }
 
-    private static void handleMarkUnmark(String input, Task[] tasks, int taskCount, boolean isMark) throws
+    private static void handleDeletion(String input, ArrayList<Task> tasks) throws MessiException {
+        try {
+            String[] parts = input.split(" ");
+            if (parts.length < 2) {
+                throw new MessiException("Which task do you want removed?");
+            }
+            int index = Integer.parseInt(parts[1]) - 1;
+            if (index < 0 || index >= tasks.size()) {
+                throw new MessiException("We don't have that task number.");
+            }
+            Task removedTask = tasks.remove(index);
+            System.out.println("Noted, I've removed this task:");
+            System.out.println(" " + removedTask);
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        } catch (NumberFormatException e) {
+            throw new MessiException("camera woah woah! that task number is not valid.");
+        }
+    }
+
+    private static void handleMarkUnmark(String input, ArrayList<Task> tasks, boolean isMark) throws
             MessiException {
         try {
             String[] parts = input.split(" ");
@@ -80,15 +101,15 @@ public class Messi {
                 throw new MessiException("which number do i mark?"); //no number
             }
             int taskIndex = Integer.parseInt(parts[1]) - 1;
-            if (taskIndex < 0 || taskIndex >= taskCount) {
+            if (taskIndex < 0 || taskIndex >= tasks.size()) {
                 throw new MessiException("that number is not in our system."); //number is out of bounds
             }
             if (isMark) {
-                tasks[taskIndex].markAsDone();
-                System.out.println("Nice! I've marked this task as done:\n  " + tasks[taskIndex]);
+                tasks.get(taskIndex).markAsDone();
+                System.out.println("Nice! I've marked this task as done:\n  " + tasks.get(taskIndex));
             } else {
-                tasks[taskIndex].unmarkAsDone();
-                System.out.println("OK, I've marked this task as not done yet:\n  " + tasks[taskIndex]);
+                tasks.get(taskIndex).unmarkAsDone();
+                System.out.println("OK, I've marked this task as not done yet:\n  " + tasks.get(taskIndex));
             }
         } catch (NumberFormatException e) {
             throw new MessiException("that number is not valid"); //non integer input
