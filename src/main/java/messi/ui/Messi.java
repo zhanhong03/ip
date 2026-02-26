@@ -34,42 +34,63 @@ public class Messi {
             String arguments = (parts.length > 1) ? parts[1] : "";
 
             try {
-                if (command.equals("bye")) {
+                switch (command) {
+                case "bye":
                     System.out.println("Bye. Hope to see you again soon!");
                     ui.showLine();
+                    return;
+
+                case "list":
+                    ui.showTaskList(tasks);
                     break;
-                } else if (command.equals("list")) {
-                    System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < tasks.size(); i++) {
-                        System.out.println((i + 1) + "." + tasks.getTask(i).toString());
-                    }
-                } else if (command.equals("mark")) {
+
+                case "mark":
                     handleMarkUnmark(arguments, tasks, true);
                     storage.save(tasks.getAllTasks());
-                } else if (command.equals("unmark")) {
+                    break;
+
+                case "unmark":
                     handleMarkUnmark(arguments, tasks, false);
                     storage.save(tasks.getAllTasks());
-                } else if (command.equals("delete")) {
+                    break;
+
+                case "delete":
                     handleDeletion(arguments, tasks);
                     storage.save(tasks.getAllTasks());
-                } else if (command.equals("todo")) {
+                    break;
+
+                case "todo":
                     if (arguments.isEmpty()) {
                         throw new MessiException("oh no! to do what??");
                     }
                     tasks.addTask(new Todo(arguments));
                     printAddedMessage(tasks.getTask(tasks.size() - 1), tasks.size());
                     storage.save(tasks.getAllTasks());
-                } else if (command.equals("deadline")) {
+                    break;
+
+                case "deadline":
                     String[] deadlineParts = Parser.parseDeadline(arguments);
                     tasks.addTask(new Deadline(deadlineParts[0], deadlineParts[1]));
                     printAddedMessage(tasks.getTask(tasks.size() - 1), tasks.size());
                     storage.save(tasks.getAllTasks());
-                } else if (command.equals("event")) {
+                    break;
+
+                case "event":
                     String[] eventParts = Parser.parseEvent(arguments);
                     tasks.addTask(new Event(eventParts[0], eventParts[1], eventParts[2]));
                     printAddedMessage(tasks.getTask(tasks.size() - 1), tasks.size());
                     storage.save(tasks.getAllTasks());
-                } else {
+                    break;
+
+                case "find":
+                    if (arguments.isEmpty()) {
+                        throw new MessiException("camera woah woah! find what??");
+                    }
+                    TaskList matches = tasks.findTasks(arguments);
+                    ui.showFoundTasks(matches);
+                    break;
+
+                default:
                     throw new MessiException("camera woah woah sorry i don't know what that means");
                 }
             } catch (MessiException e) {

@@ -6,12 +6,10 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> tasks;
 
-    // Constructor for when we load existing tasks from a file
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
-    // Constructor for starting with an empty list
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
@@ -35,4 +33,14 @@ public class TaskList {
     public ArrayList<Task> getAllTasks() {
         return tasks;
     }
+
+public TaskList findTasks(String keyword) {
+    TaskList matchingTasks = new TaskList();
+    for (Task task : this.tasks) {
+        if (task.toString().toLowerCase().contains(keyword.toLowerCase())) {
+            matchingTasks.addTask(task);
+        }
+    }
+    return matchingTasks;
+}
 }
