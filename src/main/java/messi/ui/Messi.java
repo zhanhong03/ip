@@ -149,7 +149,7 @@ public class Messi {
                 System.out.println("OK, I've marked this task as not done yet:\n  " + task);
             }
         } catch (NumberFormatException e) {
-            throw new MessiException("that number is not valid");
+            throw new MessiException("that number is not valid ");
         }
     }
 
