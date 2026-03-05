@@ -1,30 +1,38 @@
-# Duke User Guide
+# Messi Task Manager
 
-// Update the title above to match the actual product name
+Welcome to **Messi**, your personal assistant for managing tasks with ease!
 
-// Product screenshot goes here
+## Features
 
-// Product intro goes here
+### 1. Adding a Todo: `todo`
+Adds a task without any date/time.
+* **Format:** `todo DESCRIPTION`
+* **Example:** `todo read book`
 
-## Adding deadlines
+### 2. Adding a Deadline: `deadline`
+Adds a task with a deadline.
+* **Format:** `deadline DESCRIPTION /by DATE`
+* **Example:** `deadline return book /by Sunday`
 
-// Describe the action and its outcome.
+### 3. Adding an Event: `event`
+Adds a task that occurs during a specific time period.
+* **Format:** `event DESCRIPTION /from START /to END`
+* **Example:** `event project meeting /from Mon 2pm /to 4pm`
 
-// Give examples of usage
+### 4. Finding Tasks: `find`
+Finds tasks that contain a specific keyword.
+* **Format:** `find KEYWORD`
+* **Example:** `find book`
 
-Example: `keyword (optional arguments)`
+### 5. Listing all Tasks: `list`
+Shows all tasks currently in your list.
+* **Format:** `list`
 
-// A description of the expected outcome goes here
+### 6. Deleting a Task: `delete`
+Removes a task from the list.
+* **Format:** `delete INDEX`
+* **Example:** `delete 1`
 
-```
-expected output
-```
-
-## Feature ABC
-
-// Feature details
-
-
-## Feature XYZ
-
-// Feature details
+### 7. Exiting the program: `bye`
+Exits the application.
+* **Format:** `bye`~~~~
