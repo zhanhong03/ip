@@ -3,6 +3,9 @@ package messi.ui;
 import messi.tasklist.TaskList;
 import java.util.Scanner;
 
+/**
+ * Handles all interactions with the user (input and output).
+ */
 public class Ui {
     private final String horizontalLine = "____________________________________________________________";
     private final Scanner scanner;
@@ -11,6 +14,9 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Displays the welcome message to the user.
+     */
     public void showWelcome() {
         showLine();
         System.out.println("Hola! I'm Messi");
@@ -18,10 +24,18 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Prints a standard horizontal line separator.
+     */
     public void showLine() {
         System.out.println(horizontalLine);
     }
 
+    /**
+     * Reads a full line of text entered by the user.
+     *
+     * @return The raw command string.
+     */
     public String readCommand() {
         return scanner.nextLine();
     }
@@ -30,6 +44,11 @@ public class Ui {
         System.out.println(message);
     }
 
+    /**
+     * Displays a list of tasks that matched a search keyword.
+     *
+     * @param foundTasks The TaskList containing search matches.
+     */
     public void showFoundTasks(TaskList foundTasks) {
         if (foundTasks.size() == 0) {
             System.out.println("No matching tasks found in your list.");
@@ -41,6 +60,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Displays all tasks currently in the main TaskList.
+     *
+     * @param tasks The main TaskList to be displayed.
+     */
     public void showTaskList(TaskList tasks) {
         if (tasks.size() == 0) {
             System.out.println("Your list is currently empty.");

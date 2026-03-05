@@ -11,7 +11,17 @@ import messi.parser.Parser;
 
 import java.io.IOException;
 
+/**
+ * The main entry point for the Messi chatbot application.
+ * Coordinates the UI, Storage, TaskList, and Parser to manage user tasks.
+ */
 public class Messi {
+
+    /**
+     * Runs the main program loop, interpreting user commands until exit.
+     *
+     * @param args Command line arguments (not used).
+     */
     public static void main(String[] args) {
         Ui ui = new Ui();
         Storage storage = new Storage("./data/messi.txt");
@@ -143,6 +153,12 @@ public class Messi {
         }
     }
 
+    /**
+     * Prints a confirmation message when a task is successfully added.
+     *
+     * @param task The task that was added.
+     * @param count The current number of tasks in the list.
+     */
     private static void printAddedMessage(Task task, int count) {
         System.out.println("Got it. I've added this task:");
         System.out.println(" " + task.toString());

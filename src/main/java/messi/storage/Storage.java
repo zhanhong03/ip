@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     private String filePath;
 
@@ -17,6 +20,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the task data from the storage file.
+     *
+     * @return An ArrayList of tasks loaded from the file.
+     * @throws IOException If there is an error reading the file.
+     */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> tasks = new ArrayList<>();
         File f = new File(filePath);
@@ -55,6 +64,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the current list of tasks to the storage file.
+     *
+     * @param tasks The list of tasks to be written to the file.
+     */
     public void save(ArrayList<Task> tasks) {
         try (FileWriter fw = new FileWriter(filePath)) {
             for (Task t : tasks) {
